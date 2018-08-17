@@ -1,0 +1,192 @@
+body {
+	background: url("bg.png") center center fixed;
+	font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+img.logo {
+	position: fixed;
+	left: 24px;
+	top: 24px;
+	width: auto;
+	height: 48px;
+	z-index: 100;
+}
+
+main {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+}
+
+main > content {
+	flex-grow: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+canvas#preview {
+	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+main aside {
+	background: #fff;
+	width: 320px;
+	padding: 16px 24px 32px 24px;
+	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.4);
+	overflow: auto;
+}
+
+h1 {
+	margin: 16px 0 0 0;
+}
+
+div.styleSelector {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+header {
+	color: #555;
+	font-size: 90%;
+	margin: 0px 0px 4px 0px;
+	min-width: 100%;
+	text-transform: uppercase;
+}
+
+div.styleSelector img {
+	min-width: 64px;
+	min-height: 64px;
+	margin: 0px 8px 8px 0px;
+}
+
+div.styleSelector img.selected {
+	box-shadow: 0px 0px 0px 4px lightgreen;
+}
+
+span#selectedStyle {
+	font-weight: 700;
+}
+
+article {
+	display: none;
+}
+
+article.selected, section {
+	display: flex;
+	flex-direction: column;
+}
+
+article div, section div {
+	display: flex;
+	align-items: center;
+	margin: 2px 0px;
+}
+
+article div label, section div label {
+	flex-grow: 1;
+}
+
+article div *:last-child, section div *:last-child {
+	width: 164px;
+}
+
+select {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+button {
+	background: #fff;
+	color: #000;
+	font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+	font-size: 14pt;
+	font-weight: 700;
+	padding: 4px 16px;
+	margin: 2px 0px;
+	margin-bottom: 24px;
+	border: 2px dashed #000;
+	outline: 0;
+}
+
+button:hover {
+	background: #eee;
+}
+
+button:active {
+	background: #ddd;
+}
+
+div.hidden {
+	display: none;
+}
+
+div.rendering {
+	position: fixed;
+	top: 16px;
+	right: 390px;
+	background: #333;
+	color: #fff;
+	padding: 4px 16px;
+	border-radius: 8px;
+	display: none;
+}
+
+@media (max-width: 768px) {	
+	main {
+		flex-direction: column;
+	}
+
+	main aside {
+		width: unset;
+		height: 320px;
+	}
+
+	div.styleSelector header {
+		display: none;
+	}
+	
+	div.accordion:not(.expanded) h1:after {
+		content: "...";
+	}
+	
+	div.accordion:not(.expanded) content {
+		display: none;
+	}
+
+	h1 {
+		position: relative;
+		margin: 4px 0;
+		padding: 8px 12px;
+		font-weight: 400;
+		font-size: 14pt;
+		cursor: pointer;
+	}
+
+	h1:before {
+		position: absolute;
+		right: 16px;
+		top: 50%;
+		width: 16px;
+		height: 16px;
+		content: "";
+		border-right: 1px solid #000;
+		border-bottom: 1px solid #000;
+		transform: translateY(-70%) rotate(45deg);
+	}
+	
+	div.accordion.expanded h1:before {
+		transform: translateY(-30%) rotate(-135deg);
+	}
+
+	h1:hover {
+		background: #eee;
+	}
+
+	div.rendering {
+		right: 24px;
+	}
+}

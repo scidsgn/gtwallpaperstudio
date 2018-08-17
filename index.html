@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>GT Wallpaper Studio</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="styles.css">
+		
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	</head>
+	<body>
+		<img src="logo.svg" class="logo">
+		<div class="hidden">
+			<canvas id="export">
+		</div>
+		<main>
+			<content>
+				<canvas id="preview" width="960" height="540">
+			</content>
+			<aside>
+				<div class="accordion">
+					<h1>Style</h1>
+					<content>
+						<div class="styleSelector">
+							<header>10M wallpapers</header>
+							<img src="res/ribbon/icon.png" data-style="ribbon">
+							<img src="res/domainColoring/icon.png" data-style="domainColoring">
+							<img src="res/dotMatrix/icon.png" data-style="dotMatrix">
+							<img src="res/gradient/icon.png" data-style="gradient">
+							<img src="res/ridges/icon.png" data-style="ridges">
+							
+							<header>11M wallpapers</header>
+							<img src="res/nTrophy/icon.png" data-style="nTrophy">
+							<img src="res/nSurface/icon.png" data-style="nSurface">
+							<img src="res/nMinimal/icon.png" data-style="nMinimal">
+							
+							<header>TheoryWear wallpapers</header>
+							<img src="res/twFabric/icon.png" data-style="twFabric" class="selected">
+							<img src="res/twNTS/icon.png" data-style="twNTS">
+						</div>
+					</content>
+				</div>
+				
+				<div class="accordion">
+					<h1>Customization</h1>
+					<content>
+						<article data-style="twFabric" class="selected">
+							<header>Texture</header>
+							<div>
+								<label>Pattern:</label>
+								<select data-prop="pattern">
+									<optgroup label="TheoryWear Winter 2018">
+										<option value="tw18winter">Packaging pattern</option>
+									</optgroup>
+									<optgroup label="TheoryWear Summer 2018">
+										<option selected value="tw18summer">Shirt pattern</option>
+										<option value="tw18summer_package">Packaging pattern</option>
+									</optgroup>
+								</select>
+							</div>
+							<div>
+								<label>Background color:</label>
+								<input data-prop="texBg" value="#000000" type="color">
+							</div>
+							<div>
+								<label>Accent color:</label>
+								<input data-prop="texColor" value="#00FF00" type="color">
+							</div>
+							
+							<header>Material &amp; lighting</header>
+							<div>
+								<label>Finish:</label>
+								<select data-prop="finish">
+									<option value="matte">Matte</option>
+									<option value="glossSharp">Glossy (sharp)</option>
+									<option selected value="glossMedium">Glossy (medium)</option>
+									<option value="glossSoft">Glossy (soft)</option>
+								</select>
+							</div>
+							<div>
+								<label>Light color:</label>
+								<input data-prop="light" value="#FFFFFF" type="color">
+							</div>
+							
+							<header>Geometry</header>
+							<div>
+								<label>Model:</label>
+								<select data-prop="model">
+									<option value="trefoil1" selected>Trefoil knot</option>
+									<option value="stairs">Stairs</option>
+								</select>
+							</div>
+						</article>
+						
+						<article data-style="ribbon">
+							<div>
+								<label>Theme:</label>
+								<select data-prop="theme">
+									<option selected value="light">Light</option>
+									<option value="light2">Light (Inverted)</option>
+									<option value="dark">Dark</option>
+								</select>
+							</div>
+							<div>
+								<label>Geometry:</label>
+								<select data-prop="geom">
+									<option selected value="loose">Loose</option>
+									<option value="tight">Tight</option>
+								</select>
+							</div>
+							<div>
+								<label>Camera Angle:</label>
+								<select data-prop="angle">
+									<option selected value="1">Full view</option>
+									<option value="2">Left side</option>
+									<option value="3">Top-right close-up</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+						</article>
+						
+						<article data-style="domainColoring">
+							<div>
+								<label>View:</label>
+								<select data-prop="angle">
+									<option selected value="1">View #1</option>
+									<option value="2">View #2</option>
+									<option value="3">View #3</option>
+									<option value="4">View #4</option>
+									<option value="5">View #5</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+						</article>
+						
+						<article data-style="gradient">
+							<div>
+								<label>Design:</label>
+								<select data-prop="var">
+									<option selected value="1">Stack</option>
+									<option value="2">Shadow</option>
+									<option value="3">Mirrored</option>
+									<option value="4">Sneaking</option>
+									<option value="5">Logo</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+						</article>
+						
+						<article data-style="dotMatrix">
+							<div>
+								<label>Theme:</label>
+								<select data-prop="theme">
+									<option selected value="default">Colored logo</option>
+									<option value="invert">Colored background</option>
+								</select>
+							</div>
+							<div>
+								<label>Overlay:</label>
+								<select data-prop="matrix">
+									<option selected value="circle">Circles</option>
+									<option value="square">Squares</option>
+									<option value="diamond">Diamond</option>
+									<option value="checker">Checkerboard</option>
+									<option value="rgbvert">Vertical pixels</option>
+									<option value="rgbhorz">Horizontal pixels</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>View:</label>
+								<select data-prop="view">
+									<option selected value="1">View #1</option>
+									<option value="2">View #2</option>
+									<option value="3">View #3</option>
+									<option value="4">View #4</option>
+									<option value="5">View #5</option>
+									<option value="6">View #6</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>Fill mode:</label>
+								<select data-prop="fill">
+									<option selected value="solid">Single color (Color 1)</option>
+									<option value="gradient">Linear gradient</option>
+								</select>
+							</div>
+							
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+							<div>
+								<label>Gradient angle:</label>
+								<input data-prop="angle" value="0" min="0" max="359" type="range">
+							</div>
+						</article>
+						
+						<article data-style="nTrophy">					
+							<header>Materials</header>
+							<div>
+								<label>Floor material:</label>
+								<select data-prop="fmat">
+									<option selected value="diffuse">Diffuse</option>
+									<option value="aniso">Brushed (anisotropic)</option>
+								</select>
+							</div>
+							<div>
+								<label>Trophy material:</label>
+								<select data-prop="tmat">
+									<option selected value="diffuse">Diffuse</option>
+									<option value="glossy">Glossy</option>
+									<option value="aniso">Brushed (anisotropic)</option>
+								</select>
+							</div>
+							
+							<header>Lighting</header>
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+							<div>
+								<label>Color 3:</label>
+								<input data-prop="color3" value="#000000" type="color">
+							</div>
+						</article>
+						
+						<article data-style="nSurface">
+							<header>Materials</header>
+							<div>
+								<label>Floor material:</label>
+								<select data-prop="fmat">
+									<option selected value="diffuse">Diffuse</option>
+									<option value="mirror">Mirror</option>
+									<option value="frost1">Frosted mirror</option>
+									<option value="frost2">Frosted mirror (soft)</option>
+									<option value="aniso1">Brushed metal</option>
+									<option value="aniso2">Brushed metal (soft)</option>
+								</select>
+							</div>
+							<div>
+								<label>Trophy material:</label>
+								<select data-prop="tmat">
+									<option value="diffuse">Diffuse</option>
+									<option selected value="mirror">Mirror</option>
+									<option value="frost1">Frosted mirror</option>
+									<option value="frost2">Frosted mirror (soft)</option>
+									<option value="aniso1">Brushed metal</option>
+									<option value="aniso2">Brushed metal (soft)</option>
+								</select>
+							</div>
+							
+							<header>Logo</header>
+							<div>
+								<label>Design:</label>
+								<select data-prop="design">
+									<option selected value="full">Full logo</option>
+									<option value="oneseg">GT logo (1 segment)</option>
+									<option value="nostar">Only segments and trophy</option>
+									<option value="nostaroneseg">Only 1 segment and trophy</option>
+									<option value="trophy">Only trophy</option>
+								</select>
+							</div>
+							<div>
+								<label>Scale:</label>
+								<input data-prop="scale" value="1" min="0.8" max="2" step="0.1" type="range">
+							</div>
+							
+							<header>Color &amp; lighting</header>
+							<div>
+								<label>Floor color:</label>
+								<input data-prop="fcolor" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Trophy color:</label>
+								<input data-prop="tcolor" value="#FFFFFF" type="color">
+							</div>
+							<div>
+								<label>Light:</label>
+								<input data-prop="light" value="#FFFFFF" type="color">
+							</div>
+						</article>
+						
+						<article data-style="twNTS">
+							<header>Background</header>
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#15f00f" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#34d330" type="color">
+							</div>
+							<div>
+								<label>Color 3:</label>
+								<input data-prop="color3" value="#fd9710" type="color">
+							</div>
+							<div>
+								<label>Twist:</label>
+								<input data-prop="twist" value="0.03" min="-0.3" max="0.3" step="0.01" type="range">
+							</div>
+							
+							<header>Stars</header>
+							<div>
+								<label>Star:</label>
+								<select data-prop="starm">
+									<option selected value="both">Both</option>
+									<option value="onlybig">Only large star</option>
+									<option value="none">None</option>
+								</select>
+							</div>
+							<div>
+								<label>Star color:</label>
+								<input data-prop="star" value="#ffff00" type="color">
+							</div>
+							<div>
+								<label>Star 1 rotation:</label>
+								<input data-prop="star1rot" value="0" min="0" max="359" type="range">
+							</div>
+							<div>
+								<label>Star 2 rotation:</label>
+								<input data-prop="star2rot" value="29" min="0" max="359" type="range">
+							</div>
+							
+							<header>Nothingtoseehere.</header>
+							<div>
+								<label>Face:</label>
+								<select data-prop="face">
+									<option selected value="1">Face #1</option>
+									<option value="2">Face #2</option>
+									<option value="3">Face #3</option>
+									<option value="4">Face #4</option>
+									<option value="5">Face #5</option>
+								</select>
+							</div>
+							<div>
+								<label>Eyes:</label>
+								<select data-prop="eyes">
+									<option selected value="e">Open</option>
+									<option value="ne">Closed</option>
+								</select>
+							</div>
+							<div>
+								<label>Eye color:</label>
+								<input data-prop="eye" value="#225de3" type="color">
+							</div>
+						</article>
+						
+						<article data-style="nMinimal">
+							<header>Background</header>
+							<div>
+								<label>Background color:</label>
+								<input data-prop="bg" value="#ffffff" type="color">
+							</div>
+							
+							<header>Colors</header>
+							<div>
+								<label>Color 1:</label>
+								<input data-prop="color1" value="#ffffff" type="color">
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<input data-prop="color2" value="#000000" type="color">
+							</div>
+							
+							<header>Layout</header>
+							<div>
+								<label>Radius:</label>
+								<input data-prop="radius" value="50" min="20" max="500" type="range">
+							</div>
+							<div>
+								<label>Angle:</label>
+								<input data-prop="angle" value="0" min="0" max="359" type="range">
+							</div>
+							<div>
+								<label>Item count:</label>
+								<input data-prop="count" value="3" min="1" max="24" type="range">
+							</div>
+							<div>
+								<label>Position shift:</label>
+								<input data-prop="posShift" value="0" min="-0.5" max="0.5" step="0.025" type="range">
+							</div>
+							
+							<header>Per-item transform</header>
+							<div>
+								<label>Rotation:</label>
+								<input data-prop="itemRot" value="0" min="0" max="359" type="range">
+							</div>
+							<div>
+								<label>Scale:</label>
+								<input data-prop="itemScale" value="1" min="0.5" max="5" step="0.1" type="range">
+							</div>
+						</article>
+						
+						<article data-style="ridges">
+							<header>Camera</header>
+							<div>
+								<label>Angle:</label>
+								<select data-prop="angle">
+									<option selected value="1">Top</option>
+									<option value="2">Side</option>
+								</select>
+							</div>
+							
+							<header>Finish</header>
+							<div>
+								<label>Finish:</label>
+								<select data-prop="finish">
+									<option selected value="matte">Matte</option>
+									<option value="metallic">Metallic</option>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<input data-prop="color" value="#ffffff" type="color">
+							</div>
+						</article>
+					</content>
+				</div>
+				
+				<div class="accordion">
+					<h1>Exporting</h1>
+					<content>
+						<section>
+							<div>
+								<label>Resolution:</label>
+								<select id="exportResolution">
+									<option value="hd">HD 1280x720</option>
+									<option selected value="fhd">FHD 1920x1080</option>
+									<option value="2k">2K 2560x1440</option>
+									<option value="4k">4K 3860x2160</option>
+								</select>
+							</div>
+							<button id="startExporting">Export</button>
+						</section>
+					</content>
+				</div>
+			</aside>
+			<div class="rendering">Rendering...</div>
+		</main>
+		<script src="script.js"></script>
+	</body>
+</html>
