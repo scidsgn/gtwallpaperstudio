@@ -562,13 +562,6 @@ styleRenderers.nMinimal = function(canvas, isPreview) {
 		
 		ctx.resetTransform();
 		
-		// ctx.translate(-224, -256);
-		
-		// var scale = 0.7;
-		// ctx.scale(scale, scale);
-		// console.log(x);
-		// ctx.translate(radius * Math.cos(angle) * (x * 2 - 1), radius * Math.sin(angle) * (x * 2 - 1));
-		
 		ctx.translate(canvas.width / 2, canvas.height / 2);
 		
 		var _x = x + +prop("posShift");
@@ -588,6 +581,95 @@ styleRenderers.nMinimal = function(canvas, isPreview) {
 	// ctx.fill(trophyPath);
 	
 	finishExporting(isPreview);
+}
+// CRYSTAL CUT
+styleRenderers.crystal1 = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+
+	var path = imgPath("outline"+prop("shape") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	
+	var trophyPath = new Path2D("M119.9-256H-120c-57.4,0-104,46.6-104,104c0,54.8,42.3,99.6,96,103.7V0c0,19.6,5.5,38.4,15.5,54.4	c9.9,16.1,24.2,29.4,41.8,38.2c2.1,1,3.8,2.6,4.9,4.5c1.2,1.9,1.8,4.1,1.8,6.4V160c0,4.9-1.4,9.6-3.9,13.6s-6,7.3-10.4,9.5L-96,192	v64h192v-64l-17.7-8.8c-8.8-4.4-14.3-13.3-14.3-23.2v-56.5c0-4.6,2.6-8.9,6.8-10.9c17.5-8.8,31.8-22.1,41.8-38.2	C122.4,38.3,128,19.6,128,0v-48.3c53.7-4.1,96-49,96-103.7C223.9-209.4,177.3-256,119.9-256z M-128-80.4c-36-4-64-34.5-64-71.6	s28-67.6,64-71.6V-80.4z M127.9-80.4v-143.2c36,4,64,34.5,64,71.6S163.9-84.4,127.9-80.4z");
+	
+	function drawTrophy() {
+		ctx.fillStyle = prop("tColor");
+		ctx.translate(canvas.width / 2, canvas.height / 2);
+		ctx.scale(0.5 * canvas.width / 960, 0.5 * canvas.width / 960);
+		ctx.fill(trophyPath);
+		ctx.resetTransform();
+	}
+	
+	//tBlend
+	
+	img.onload = function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+		
+		ctx.globalCompositeOperation = "source-in";
+		ctx.fillStyle = prop("color");
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.globalCompositeOperation = "destination-over";
+		ctx.fillStyle = prop("bgColor");
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		if (prop("tBlend") == "multiply") {
+			ctx.globalCompositeOperation = "source-over";
+			drawTrophy();
+		}
+		
+		ctx.globalCompositeOperation = "source-over";
+		
+		var path2 = imgPath("main"+prop("shape")+"_"+prop("style") + (isPreview ? "_preview" : ""));
+		var img2 = new Image();
+		
+		img2.onload = function() {
+			ctx.globalCompositeOperation = "multiply";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			if (prop("tBlend") == "solid") {
+				ctx.globalCompositeOperation = "source-over";
+				drawTrophy();
+			} else if (prop("tBlend") == "screen") {
+				ctx.globalCompositeOperation = "screen";
+				drawTrophy();
+			}
+			
+			ctx.globalCompositeOperation = "source-over";
+			
+			finishExporting(isPreview);
+		}
+		
+		img2.src = path2;
+		
+	}
+
+	img.src = path;
+}
+// STACK
+styleRenderers.stack1 = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+
+	var path = imgPath("main"+prop("var") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	//tBlend
+	
+	img.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+		
+		ctx.fillStyle = prop("color2");
+		ctx.globalCompositeOperation = "screen";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.globalCompositeOperation = "source-over";
+			
+		finishExporting(isPreview);
+	}
+
+	img.src = path;
 }
 
 function prop(name) {
@@ -626,21 +708,47 @@ function exportWallpaper() {
 
 function finishExporting(isPreview) {
 	document.querySelector(".rendering").style.display = "none";
-	if (!isPreview) {
-		var url = exportCanvas.toDataURL("image/jpeg");
-		var a = document.createElement("a");
+	
+	// watermark!
+	var canvas = isPreview ? document.querySelector("#preview") : exportCanvas;
+	var ctx = canvas.getContext("2d");
+	
+	var img = new Image();
+	
+	img.onload = function() {
+		ctx.globalCompositeOperation = "source-over";
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+		
+		if (!isPreview) {
+			var url = exportCanvas.toDataURL("image/jpeg");
+			var a = document.createElement("a");
 
-		a.setAttribute("href", url);
-		a.setAttribute("download", currentStyle + "_" + exportSize.join("x") + ".jpg");
-		a.click();
+			a.setAttribute("href", url);
+			a.setAttribute("download", currentStyle + "_" + exportSize.join("x") + ".jpg");
+			a.click();
+		}
 	}
+	
+	img.src = "img/watermark.png";
 }
 
 // Add change events
 document.querySelectorAll("article[data-style] *[data-prop]").forEach(function(e) {
 	e.addEventListener("change", function() {
+		if (this.type == "color") {
+			if (this.parentNode.classList.contains("colorInput")) {
+				this.parentNode.style.background = this.value;
+			}
+		}
+		
 		renderPreview();
 	})
+});
+
+document.querySelectorAll("input[data-prop][type=color]").forEach(function(e) {
+	if (e.parentNode.classList.contains("colorInput")) {
+		e.parentNode.style.background = e.value;
+	}
 });
 
 // Style selector

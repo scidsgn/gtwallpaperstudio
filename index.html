@@ -4,13 +4,13 @@
 	<head>
 		<title>GT Wallpaper Studio</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="styles.css?v=1">
 		
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
 		
 		<link rel="manifest" href="/manifest.json">
 	</head>
-	<body>
+	<body>	
 		<img src="logo.svg" class="logo">
 		<div class="hidden">
 			<canvas id="export">
@@ -24,21 +24,18 @@
 					<h1>Style</h1>
 					<content>
 						<div class="styleSelector">
-							<header>10M wallpapers</header>
 							<img src="res/ribbon/icon.png" data-style="ribbon">
 							<img src="res/domainColoring/icon.png" data-style="domainColoring">
 							<img src="res/dotMatrix/icon.png" data-style="dotMatrix">
 							<img src="res/gradient/icon.png" data-style="gradient">
 							<img src="res/ridges/icon.png" data-style="ridges">
-							
-							<header>11M wallpapers</header>
 							<img src="res/nTrophy/icon.png" data-style="nTrophy">
 							<img src="res/nSurface/icon.png" data-style="nSurface">
 							<img src="res/nMinimal/icon.png" data-style="nMinimal">
-							
-							<header>TheoryWear wallpapers</header>
 							<img src="res/twFabric/icon.png" data-style="twFabric" class="selected">
 							<img src="res/twNTS/icon.png" data-style="twNTS">
+							<img src="res/crystal1/icon.png" data-style="crystal1">
+							<img src="res/crystal1/icon.png" data-style="stack1">
 						</div>
 					</content>
 				</div>
@@ -62,11 +59,11 @@
 							</div>
 							<div>
 								<label>Background color:</label>
-								<input data-prop="texBg" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="texBg" value="#000000" type="color"></div>
 							</div>
 							<div>
 								<label>Accent color:</label>
-								<input data-prop="texColor" value="#00FF00" type="color">
+								<div class="colorInput"><input data-prop="texColor" value="#00FF00" type="color"></div>
 							</div>
 							
 							<header>Material &amp; lighting</header>
@@ -81,7 +78,7 @@
 							</div>
 							<div>
 								<label>Light color:</label>
-								<input data-prop="light" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="light" value="#FFFFFF" type="color"></div>
 							</div>
 							
 							<header>Geometry</header>
@@ -121,11 +118,11 @@
 							
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 						</article>
 						
@@ -143,11 +140,11 @@
 							
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 						</article>
 						
@@ -165,11 +162,11 @@
 							
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 						</article>
 						
@@ -215,11 +212,11 @@
 							
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 							<div>
 								<label>Gradient angle:</label>
@@ -248,15 +245,15 @@
 							<header>Lighting</header>
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 							<div>
 								<label>Color 3:</label>
-								<input data-prop="color3" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color3" value="#000000" type="color"></div>
 							</div>
 						</article>
 						
@@ -304,15 +301,15 @@
 							<header>Color &amp; lighting</header>
 							<div>
 								<label>Floor color:</label>
-								<input data-prop="fcolor" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="fcolor" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Trophy color:</label>
-								<input data-prop="tcolor" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="tcolor" value="#FFFFFF" type="color"></div>
 							</div>
 							<div>
 								<label>Light:</label>
-								<input data-prop="light" value="#FFFFFF" type="color">
+								<div class="colorInput"><input data-prop="light" value="#FFFFFF" type="color"></div>
 							</div>
 						</article>
 						
@@ -320,15 +317,15 @@
 							<header>Background</header>
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#15f00f" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#15f00f" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#34d330" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#34d330" type="color"></div>
 							</div>
 							<div>
 								<label>Color 3:</label>
-								<input data-prop="color3" value="#fd9710" type="color">
+								<div class="colorInput"><input data-prop="color3" value="#fd9710" type="color"></div>
 							</div>
 							<div>
 								<label>Twist:</label>
@@ -346,7 +343,7 @@
 							</div>
 							<div>
 								<label>Star color:</label>
-								<input data-prop="star" value="#ffff00" type="color">
+								<div class="colorInput"><input data-prop="star" value="#ffff00" type="color"></div>
 							</div>
 							<div>
 								<label>Star 1 rotation:</label>
@@ -377,7 +374,7 @@
 							</div>
 							<div>
 								<label>Eye color:</label>
-								<input data-prop="eye" value="#225de3" type="color">
+								<div class="colorInput"><input data-prop="eye" value="#225de3" type="color"></div>
 							</div>
 						</article>
 						
@@ -385,17 +382,17 @@
 							<header>Background</header>
 							<div>
 								<label>Background color:</label>
-								<input data-prop="bg" value="#ffffff" type="color">
+								<div class="colorInput"><input data-prop="bg" value="#ffffff" type="color"></div>
 							</div>
 							
 							<header>Colors</header>
 							<div>
 								<label>Color 1:</label>
-								<input data-prop="color1" value="#ffffff" type="color">
+								<div class="colorInput"><input data-prop="color1" value="#ffffff" type="color"></div>
 							</div>
 							<div>
 								<label>Color 2:</label>
-								<input data-prop="color2" value="#000000" type="color">
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 							
 							<header>Layout</header>
@@ -447,7 +444,66 @@
 							</div>
 							<div>
 								<label>Color:</label>
-								<input data-prop="color" value="#ffffff" type="color">
+								<div class="colorInput"><input data-prop="color" value="#ffffff" type="color"></div>
+							</div>
+						</article>
+						
+						<article data-style="crystal1">
+							<header>Shape</header>
+							<div>
+								<label>Shape:</label>
+								<select data-prop="shape">
+									<option selected value="1">Shape #1</option>
+									<option value="2">Shape #2</option>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<div class="colorInput"><input data-prop="color" value="#ff0080" type="color"></div>
+							</div>
+							<div>
+								<label>Background:</label>
+								<div class="colorInput"><input data-prop="bgColor" value="#ffffff" type="color"></div>
+							</div>
+							<div>
+								<label>Style:</label>
+								<select data-prop="style">
+									<option selected value="dark">Dark</option>
+									<option value="light">Light</option>
+								</select>
+							</div>
+							
+							<header>Trophy</header>
+							<div>
+								<label>Trophy blending:</label>
+								<select data-prop="tBlend">
+									<option selected value="solid">Solid</option>
+									<option value="screen">Screen</option>
+									<option value="multiply">Multiply</option>
+								</select>
+							</div>
+							<div>
+								<label>Trophy color:</label>
+								<div class="colorInput"><input data-prop="tColor" value="#ffffff" type="color"></div>
+							</div>
+						</article>
+						
+						<article data-style="stack1">
+							<header>Shape</header>
+							<div>
+								<label>Variation:</label>
+								<select data-prop="var">
+									<option selected value="1">Shape #1</option>
+									<option value="2">Shape #2</option>
+								</select>
+							</div>
+							<div>
+								<label>Color 1:</label>
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<div class="colorInput"><input data-prop="color2" value="#000000" type="color"></div>
 							</div>
 						</article>
 					</content>
@@ -473,6 +529,6 @@
 			</aside>
 			<div class="rendering">Rendering...</div>
 		</main>
-		<script src="script.js"></script>
+		<script src="script.js?v=2"></script>
 	</body>
 </html>

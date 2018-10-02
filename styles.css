@@ -1,6 +1,11 @@
+:root {
+	--var-font: "IBM Plex Sans", "Helvetica Neue", "Segoe UI", sans-serif;
+}
+
 body {
 	background: url("bg.png") center center fixed;
-	font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+	font-family: var(--var-font);
+	user-select: none;
 }
 
 img.logo {
@@ -30,10 +35,12 @@ main > content {
 
 canvas#preview {
 	box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+	border-radius: 8px;
 }
 
 main aside {
-	background: #fff;
+	background: #0f1012;
+	color: #fff;
 	width: 320px;
 	padding: 16px 24px 32px 24px;
 	box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.4);
@@ -60,11 +67,64 @@ header {
 div.styleSelector img {
 	min-width: 64px;
 	min-height: 64px;
-	margin: 0px 8px 8px 0px;
+	margin: 8px 8px 0px 0px;
+	border-radius: 8px;
+	filter: saturate(0.1);
+}
+
+div.styleSelector img:hover {
+	filter: saturate(0.1) brightness(1.2);
+}
+
+div.styleSelector img:active {
+	filter: saturate(0.1) brightness(0.8);
 }
 
 div.styleSelector img.selected {
-	box-shadow: 0px 0px 0px 4px lightgreen;
+	filter: saturate(1);
+	box-shadow: 0px 0px 2px rgbx(255, 255, 255, 0.6);
+}
+
+div.styleSelector header {
+	display: none;
+}
+	
+div.accordion:not(.expanded) h1:after {
+	content: "...";
+}
+	
+div.accordion:not(.expanded) content {
+	display: none;
+}
+
+h1 {
+	position: relative;
+	margin: 4px 0;
+	padding: 8px 12px;
+	font-weight: 400;
+	font-size: 14pt;
+	cursor: pointer;
+}
+
+h1:before {
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	width: 16px;
+	height: 16px;
+	content: "";
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	transform: translateY(-70%) rotate(45deg);
+}
+	
+div.accordion.expanded h1:before {
+	transform: translateY(-30%) rotate(-135deg);
+}
+
+h1:hover {
+	background: #191b1f;
+	border-radius: 4px;
 }
 
 span#selectedStyle {
@@ -100,24 +160,25 @@ select {
 }
 
 button {
-	background: #fff;
-	color: #000;
-	font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+	background: #493;
+	color: #fff;
+	font-family: var(--var-font);
 	font-size: 14pt;
 	font-weight: 700;
 	padding: 4px 16px;
 	margin: 2px 0px;
 	margin-bottom: 24px;
-	border: 2px dashed #000;
+	border: 0;
 	outline: 0;
+	border-radius: 4px;
 }
 
 button:hover {
-	background: #eee;
+	background: #371;
 }
 
 button:active {
-	background: #ddd;
+	background: #351;
 }
 
 div.hidden {
@@ -135,6 +196,45 @@ div.rendering {
 	display: none;
 }
 
+select {
+	background: #191b1f;
+	color: #fff;
+	border: 0;
+	outline: 0;
+	border-radius: 4px;
+}
+
+select:hover {
+	background: #14161a;
+}
+
+select optgroup {
+	background: #000;
+	color: #fff;
+}
+
+select option {
+	background: #000;
+	color: #fff;
+}
+
+input[type=color] {
+	background: #191b1f;
+	color: #fff;
+	border: 0;
+	outline: 0;
+	border-radius: 4px;
+}
+
+div.colorInput {
+	border-radius: 4px;
+	box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+}
+
+div.colorInput input {
+	opacity: 0;
+}
+
 @media (max-width: 768px) {	
 	main {
 		flex-direction: column;
@@ -145,46 +245,7 @@ div.rendering {
 		height: 320px;
 	}
 
-	div.styleSelector header {
-		display: none;
-	}
 	
-	div.accordion:not(.expanded) h1:after {
-		content: "...";
-	}
-	
-	div.accordion:not(.expanded) content {
-		display: none;
-	}
-
-	h1 {
-		position: relative;
-		margin: 4px 0;
-		padding: 8px 12px;
-		font-weight: 400;
-		font-size: 14pt;
-		cursor: pointer;
-	}
-
-	h1:before {
-		position: absolute;
-		right: 16px;
-		top: 50%;
-		width: 16px;
-		height: 16px;
-		content: "";
-		border-right: 1px solid #000;
-		border-bottom: 1px solid #000;
-		transform: translateY(-70%) rotate(45deg);
-	}
-	
-	div.accordion.expanded h1:before {
-		transform: translateY(-30%) rotate(-135deg);
-	}
-
-	h1:hover {
-		background: #eee;
-	}
 
 	div.rendering {
 		right: 24px;
