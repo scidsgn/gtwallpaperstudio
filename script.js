@@ -671,6 +671,95 @@ styleRenderers.stack1 = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.stack1glass = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+
+	var path = imgPath("glass_r_o_"+prop("var") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	
+	// Simulating light passing through multiple panes of tinted glass
+	var numPanes = 16; // let's say it's 8, don't ask questions for now
+	var color = prop("color");
+	var r = parseInt(color.substr(1, 2), 16) / 255
+	var g = parseInt(color.substr(3, 2), 16) / 255
+	var b = parseInt(color.substr(5, 2), 16) / 255
+	
+	var color2 = "rgb(" + 
+		Math.round(255 * r ** numPanes) + ", " +
+		Math.round(255 * g ** numPanes) + ", " +
+		Math.round(255 * b ** numPanes) + ")";
+	
+	
+	img.onload = function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+		
+		ctx.globalCompositeOperation = "source-in";
+		ctx.fillStyle = color2;
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		ctx.globalCompositeOperation = "destination-over";
+		ctx.fillStyle = color;
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		var path2 = imgPath("reflection_r_"+prop("var") + (isPreview ? "_preview" : ""));
+		var img2 = new Image();
+		
+		img2.onload = function() {
+			ctx.globalAlpha = 0.4;
+			ctx.globalCompositeOperation = "screen";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			ctx.globalAlpha = 1;
+		
+			var path3 = imgPath("outline_r_"+prop("var") + (isPreview ? "_preview" : ""));
+			var img3 = new Image();
+			
+			img3.onload = function() {
+				ctx.globalCompositeOperation = "destination-in";
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = "#fff";
+				ctx.globalCompositeOperation = "destination-over";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = prop("bgColor");
+				ctx.globalCompositeOperation = "multiply";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+								
+				ctx.globalCompositeOperation = "source-over";
+				
+				finishExporting(isPreview);
+			}
+			
+			img3.src = path3;
+		}
+		
+		img2.src = path2;
+	}
+
+	img.src = path;
+}
+styleRenderers.ominous = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+
+	var path = imgPath("main_"+prop("angle") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	
+	img.onload = function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+								
+		ctx.globalCompositeOperation = "source-over";
+				
+		finishExporting(isPreview);
+	}
+
+	img.src = path;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;
