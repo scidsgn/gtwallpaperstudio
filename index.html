@@ -38,6 +38,7 @@
 							<img src="res/stack1/icon.png" data-style="stack1">
 							<img src="res/stack1glass/icon.png" data-style="stack1glass">
 							<img src="res/ominous/icon.png" data-style="ominous">
+							<img src="res/neon/icon.png" data-style="neon">
 						</div>
 					</content>
 				</div>
@@ -532,11 +533,33 @@
 								<label>Camera angle:</label>
 								<select data-prop="angle">
 									<option selected value="1">Angle #1</option>
+									<option value="2">Angle #2</option>
 								</select>
 							</div>
 							<div>
 								<label>Color:</label>
 								<div class="colorInput"><input data-prop="color" value="#FF0000" type="color"></div>
+							</div>
+						</article>
+						
+						<article data-style="neon">
+							<div>
+								<label>Variation:</label>
+								<select data-prop="angle">
+									<optgroup label="Full view">
+										<option selected value="1">Variation #1</option>
+										<option value="2">Variation #2</option>
+										<option value="3">Variation #3</option>
+									</optgroup>
+									<optgroup label="Close-up">
+										<option value="4">Variation #1</option>
+										<option value="5">Variation #2</option>
+									</optgroup>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<div class="colorInput"><input data-prop="color" value="#2090FF" type="color"></div>
 							</div>
 						</article>
 					</content>
@@ -562,6 +585,6 @@
 			</aside>
 			<div class="rendering">Rendering...</div>
 		</main>
-		<script src="script.js?v=3"></script>
+		<script src="script.js?v=4"></script>
 	</body>
 </html>

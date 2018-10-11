@@ -6,19 +6,6 @@ var imageExtension = ".png";
 var exportSize = [1920, 1080];
 var exportCanvas = document.querySelector("#export");
 
-var styleNames = {
-	"ribbon": "Ribbon (10M)",
-	"domainColoring": "Domain coloring (10M)",
-	"dotMatrix": "Dot matrix (10M)",
-	"gradient": "Gradient (10M)",
-	"ridges": "Ridges (10M)",
-	"nTrophy": "Trophy (11M)",
-	"nSurface": "Surface (11M)",
-	"nMinimal": "Minimal (11M)",
-	"twFabric": "Fabric (TheoryWear)",
-	"twNTS": "Nothingtoseehere. (TheoryWear)",
-};
-
 // THEORYWEAR
 styleRenderers.twFabric = function(canvas, isPreview) {
 	var ctx = canvas.getContext("2d");
@@ -760,6 +747,27 @@ styleRenderers.ominous = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.neon = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+
+	var path = imgPath("main_"+prop("angle") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	
+	img.onload = function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color");
+		ctx.globalCompositeOperation = "color-burn";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+								
+		ctx.globalCompositeOperation = "source-over";
+				
+		finishExporting(isPreview);
+	}
+
+	img.src = path;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;
@@ -806,7 +814,7 @@ function finishExporting(isPreview) {
 	
 	img.onload = function() {
 		ctx.globalCompositeOperation = "source-over";
-		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, canvas.width * 0.2, canvas.height * 0.2, canvas.width * 0.8, canvas.height * 0.8);
 		
 		if (!isPreview) {
 			var url = exportCanvas.toDataURL("image/jpeg");
