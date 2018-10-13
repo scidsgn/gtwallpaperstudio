@@ -768,6 +768,79 @@ styleRenderers.neon = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.cornell = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	
+	var leftURL, rightURL;
+
+	var path = imgPath("left" + (isPreview ? "_preview" : ""));
+	var img = new Image();
+	
+	img.onload = function() {
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("left");
+		ctx.globalCompositeOperation = "source-in";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		ctx.globalCompositeOperation = "source-over";
+		
+		leftURL = canvas.toDataURL();
+		
+		var path2 = imgPath("right" + (isPreview ? "_preview" : ""));
+		var img2 = new Image();
+		
+		img2.onload = function() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("right");
+			ctx.globalCompositeOperation = "source-in";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			ctx.globalCompositeOperation = "source-over";
+			
+			rightURL = canvas.toDataURL();
+			
+			var path3 = imgPath("base" + (isPreview ? "_preview" : ""));
+			var img3 = new Image();
+			
+			img3.onload = function() {
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.globalCompositeOperation = "multiply";
+				ctx.fillStyle = prop("light");
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				var imgLeft = new Image();
+				
+				imgLeft.onload = function() {
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					var imgRight = new Image();
+				
+					imgRight.onload = function() {
+						ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+						
+						ctx.globalCompositeOperation = "source-over";
+						finishExporting(isPreview);
+					}
+					
+					imgRight.src = rightURL;
+				}
+				
+				imgLeft.src = leftURL;
+			}
+			
+			img3.src = path3;
+		}
+		
+		img2.src = path2;		
+	}
+
+	img.src = path;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;
