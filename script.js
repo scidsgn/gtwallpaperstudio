@@ -841,6 +841,97 @@ styleRenderers.cornell = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.cornell_e = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var rPath = imgPath("e_left" + (isPreview ? "_preview" : ""));
+	var rImg = new Image();
+
+	rImg.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("left");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		redURL = canvas.toDataURL();
+
+		var gPath = imgPath("e_right" + (isPreview ? "_preview" : ""));
+		var gImg = new Image();
+
+		gImg.onload = function() {
+			ctx.globalCompositeOperation = "source-over";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("right");
+			ctx.globalCompositeOperation = "multiply";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			greenURL = canvas.toDataURL();
+			
+			bPath = imgPath("e_top" + (isPreview ? "_preview" : ""));
+			var bImg = new Image();
+
+			bImg.onload = function() {
+				ctx.globalCompositeOperation = "source-over";
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = prop("top");
+				ctx.globalCompositeOperation = "multiply";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				ctx.globalCompositeOperation = "screen";
+				
+				var r_Img = new Image();
+				r_Img.onload = function() {
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					
+					var g_Img = new Image();
+					g_Img.onload = function() {
+						ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+						ctx.globalCompositeOperation = "source-over";
+						finishExporting(isPreview);
+					}
+					g_Img.src = greenURL;
+				}
+				r_Img.src = redURL;
+			}
+			bImg.src = bPath;
+		}
+		gImg.src = gPath;
+	}
+
+	rImg.src = rPath;
+}
+styleRenderers.refraction = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var path = imgPath(prop("var") + "_" + prop("theme") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+
+	img.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "screen";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color2");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+		ctx.globalCompositeOperation = "source-over";
+		finishExporting(isPreview);
+	}
+
+	img.src = path;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;

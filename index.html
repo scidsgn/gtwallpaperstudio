@@ -40,6 +40,8 @@
 							<img src="res/ominous/icon.png" data-style="ominous">
 							<img src="res/neon/icon.png" data-style="neon">
 							<img src="res/cornell/icon.png" data-style="cornell">
+							<img src="res/cornell_e/icon.png" data-style="cornell_e">
+							<img src="res/refraction/icon.png" data-style="refraction">
 						</div>
 					</content>
 				</div>
@@ -578,6 +580,47 @@
 								<div class="colorInput"><input data-prop="light" value="#FFFFFF" type="color"></div>
 							</div>
 						</article>
+						
+						<article data-style="cornell_e">
+							<div>
+								<label>Left wall:</label>
+								<div class="colorInput"><input data-prop="left" value="#FF0000" type="color"></div>
+							</div>
+							<div>
+								<label>Right wall:</label>
+								<div class="colorInput"><input data-prop="right" value="#0000FF" type="color"></div>
+							</div>
+							<div>
+								<label>Ceiling lights:</label>
+								<div class="colorInput"><input data-prop="top" value="#FFFFFF" type="color"></div>
+							</div>
+						</article>
+						
+						<article data-style="refraction">
+							<div>
+								<label>Variation:</label>
+								<select data-prop="var">
+									<option selected value="1">Variation #1</option>
+									<option value="2">Variation #2</option>
+									<option value="3">Variation #3</option>
+								</select>
+							</div>
+							<div>
+								<label>Theme:</label>
+								<select data-prop="theme">
+									<option selected value="dark">Dark</option>
+									<option value="light">Light</option>
+								</select>
+							</div>
+							<div>
+								<label>Color 1:</label>
+								<div class="colorInput"><input data-prop="color1" value="#000000" type="color"></div>
+							</div>
+							<div>
+								<label>Color 2:</label>
+								<div class="colorInput"><input data-prop="color2" value="#00FF00" type="color"></div>
+							</div>
+						</article>
 					</content>
 				</div>
 				
@@ -601,6 +644,6 @@
 			</aside>
 			<div class="rendering">Rendering...</div>
 		</main>
-		<script src="script.js?v=5"></script>
+		<script src="script.js?v=6"></script>
 	</body>
 </html>
