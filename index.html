@@ -31,7 +31,7 @@
 							<img src="res/ridges/icon.png" data-style="ridges">
 							<img src="res/nTrophy/icon.png" data-style="nTrophy">
 							<img src="res/nSurface/icon.png" data-style="nSurface">
-							<img src="res/nMinimal/icon.png" data-style="nMinimal">
+							<img src="res/nMinimal/icon.png?v=1" data-style="nMinimal">
 							<img src="res/twFabric/icon.png" data-style="twFabric" class="selected">
 							<img src="res/twNTS/icon.png" data-style="twNTS">
 							<img src="res/crystal1/icon.png" data-style="crystal1">
@@ -46,6 +46,7 @@
 							<img src="res/single_construct/icon.png" data-style="single_construct">
 							<img src="res/single_arg/icon.png" data-style="single_arg">
 							<img src="res/gateway/icon.png" data-style="gateway">
+							<img src="res/edges/icon.png" data-style="edges">
 						</div>
 					</content>
 				</div>
@@ -670,6 +671,28 @@
 								<div class="colorInput"><input data-prop="color" value="#f8272c" type="color"></div>
 							</div>
 						</article>
+						
+						<article data-style="edges">
+							<div>
+								<label>Camera angle:</label>
+								<select data-prop="idx">
+									<option selected value="1">1</option>
+									<option value="2">2</option>
+								</select>
+							</div>
+							<div>
+								<label>Light #1:</label>
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
+							</div>
+							<div>
+								<label>Light #2:</label>
+								<div class="colorInput"><input data-prop="color2" value="#00FF00" type="color"></div>
+							</div>
+							<div>
+								<label>Light #3:</label>
+								<div class="colorInput"><input data-prop="color3" value="#00FFFF" type="color"></div>
+							</div>
+						</article>
 					</content>
 				</div>
 				
@@ -684,6 +707,7 @@
 									<option selected value="fhd">FHD 1920x1080</option>
 									<option value="2k">2K 2560x1440</option>
 									<option value="4k">4K 3860x2160</option>
+									<option value="8k">8K 7680x4320</option>
 								</select>
 							</div>
 							<button id="startExporting">Export</button>
@@ -693,6 +717,6 @@
 			</aside>
 			<div class="rendering">Rendering...</div>
 		</main>
-		<script src="script.js?v=8"></script>
+		<script src="script.js?v=10"></script>
 	</body>
 </html>

@@ -6,6 +6,8 @@ var imageExtension = ".png";
 var exportSize = [1920, 1080];
 var exportCanvas = document.querySelector("#export");
 
+var wallpapers8kEnabled = ["nMinimal", "edges"];
+
 // THEORYWEAR
 styleRenderers.twFabric = function(canvas, isPreview) {
 	var ctx = canvas.getContext("2d");
@@ -1050,8 +1052,83 @@ styleRenderers.gateway = function(canvas, isPreview) {
 	img.src = path;
 }
 
+// 8K BISH
+styleRenderers.edges = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var rPath = imgPath("red" + prop("idx") + suffix(canvas));
+	var rImg = new Image();
+
+	rImg.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		redURL = canvas.toDataURL();
+
+		var gPath = imgPath("green" + prop("idx") + suffix(canvas));
+		var gImg = new Image();
+
+		gImg.onload = function() {
+			ctx.globalCompositeOperation = "source-over";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("color2");
+			ctx.globalCompositeOperation = "multiply";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			greenURL = canvas.toDataURL();
+			
+			bPath = imgPath("blue" + prop("idx") + suffix(canvas));
+			var bImg = new Image();
+
+			bImg.onload = function() {
+				ctx.globalCompositeOperation = "source-over";
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = prop("color3");
+				ctx.globalCompositeOperation = "multiply";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				ctx.globalCompositeOperation = "screen";
+				
+				var r_Img = new Image();
+				r_Img.onload = function() {
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					
+					var g_Img = new Image();
+					g_Img.onload = function() {
+						ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+						ctx.globalCompositeOperation = "source-over";
+						finishExporting(isPreview);
+					}
+					g_Img.src = greenURL;
+				}
+				r_Img.src = redURL;
+			}
+			bImg.src = bPath;
+		}
+		gImg.src = gPath;
+	}
+
+	rImg.src = rPath;
+}
+
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;
+}
+
+function suffix(canvas) {
+	if (canvas.width == 7680)
+		return "_8k";
+	if (canvas.width <= 960)
+		return "_preview";
+	return "";
 }
 
 function imgPath(name) {
@@ -1072,13 +1149,17 @@ function exportWallpaper() {
 		"hd": [1280, 720],
 		"fhd": [1920, 1080],
 		"2k": [2560, 1440],
-		"4k": [3860, 2160]
+		"4k": [3860, 2160],
+		"8k": [7680, 4320]
 	};
 
 	exportSize = sizes[document.querySelector("#exportResolution").value];
 
 	exportCanvas.width = exportSize[0];
 	exportCanvas.height = exportSize[1];
+	
+	if (exportSize[0] == 7680 && wallpapers8kEnabled.indexOf(currentStyle) < 0)
+		return alert("This wallpaper style is not available in 8K.");
 
 	document.querySelector(".rendering").style.display = "block";
 	styleRenderers[currentStyle](exportCanvas, false);
@@ -1107,7 +1188,7 @@ function finishExporting(isPreview) {
 		}
 	}
 	
-	img.src = "img/watermark.png";
+	img.src = (canvas.width == 7680) ? "img/watermark_8k.png" : "img/watermark.png";
 }
 
 // Add change events
