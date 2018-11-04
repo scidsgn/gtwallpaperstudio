@@ -1029,6 +1029,26 @@ styleRenderers.single_arg = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.gateway = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	var path = imgPath("full" + prop("idx") + (isPreview ? "_preview" : ""));
+	var img = new Image();
+
+	img.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.globalCompositeOperation = "soft-light";
+		ctx.fillStyle = prop("color");
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		ctx.globalCompositeOperation = "source-over";
+		finishExporting(isPreview);
+	}
+
+	img.src = path;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;
