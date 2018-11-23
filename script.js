@@ -1138,6 +1138,198 @@ styleRenderers.threemat = function(canvas, isPreview) {
 
 	img.src = path;
 }
+styleRenderers.portal = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var rPath = imgPath("red" + prop("idx") + suffix(canvas));
+	var rImg = new Image();
+
+	rImg.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		redURL = canvas.toDataURL();
+
+		var gPath = imgPath("green" + prop("idx") + suffix(canvas));
+		var gImg = new Image();
+
+		gImg.onload = function() {
+			ctx.globalCompositeOperation = "source-over";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("color2");
+			ctx.globalCompositeOperation = "multiply";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			greenURL = canvas.toDataURL();
+			
+			bPath = imgPath("blue" + prop("idx") + suffix(canvas));
+			var bImg = new Image();
+
+			bImg.onload = function() {
+				ctx.globalCompositeOperation = "source-over";
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = prop("color3");
+				ctx.globalCompositeOperation = "multiply";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				ctx.globalCompositeOperation = "screen";
+				
+				var r_Img = new Image();
+				r_Img.onload = function() {
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					
+					var g_Img = new Image();
+					g_Img.onload = function() {
+						ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+						ctx.globalCompositeOperation = "source-over";
+						finishExporting(isPreview);
+					}
+					g_Img.src = greenURL;
+				}
+				r_Img.src = redURL;
+			}
+			bImg.src = bPath;
+		}
+		gImg.src = gPath;
+	}
+
+	rImg.src = rPath;
+}
+styleRenderers.tiles = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var rPath = imgPath(prop("name1") + suffix(canvas));
+	var rImg = new Image();
+
+	rImg.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "source-in";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		redURL = canvas.toDataURL();
+
+		var gPath = imgPath(prop("name2") + suffix(canvas));
+		var gImg = new Image();
+
+		gImg.onload = function() {
+			ctx.globalCompositeOperation = "source-over";
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("color2");
+			ctx.globalCompositeOperation = "source-in";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			greenURL = canvas.toDataURL();
+			
+			bPath = imgPath(prop("name3") + suffix(canvas));
+			var bImg = new Image();
+
+			bImg.onload = function() {
+				ctx.globalCompositeOperation = "source-over";
+				ctx.clearRect(0, 0, canvas.width, canvas.height);
+				ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+				
+				ctx.fillStyle = prop("color3");
+				ctx.globalCompositeOperation = "source-in";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				blueURL = canvas.toDataURL();
+				
+				ctx.globalCompositeOperation = "source-over";
+				
+				ctx.fillStyle = prop("bg");
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				
+				var r_Img = new Image();
+				r_Img.onload = function() {
+					ctx.globalCompositeOperation = prop("blend1");
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					
+					var g_Img = new Image();
+					g_Img.onload = function() {
+					ctx.globalCompositeOperation = prop("blend2");
+						ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+						
+						var b_Img = new Image();
+						b_Img.onload = function() {
+							ctx.globalCompositeOperation = prop("blend3");
+							ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+							ctx.globalCompositeOperation = "source-over";
+							finishExporting(isPreview);
+						}
+						b_Img.src = blueURL;
+					}
+					g_Img.src = greenURL;
+				}
+				r_Img.src = redURL;
+			}
+			bImg.src = bPath;
+		}
+		gImg.src = gPath;
+	}
+
+	rImg.src = rPath;
+}
+styleRenderers.holo = function(canvas, isPreview) {
+	var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	var redURL, greenURL;	
+	
+	var rPath = imgPath("red_" + prop("idx") + suffix(canvas));
+	var rImg = new Image();
+
+	rImg.onload = function() {
+		ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+
+		ctx.fillStyle = prop("color1");
+		ctx.globalCompositeOperation = "multiply";
+		ctx.fillRect(0, 0, canvas.width, canvas.height);
+		
+		redURL = canvas.toDataURL();
+
+		var gPath = imgPath("green_" + prop("idx") + suffix(canvas));
+		var gImg = new Image();
+
+		gImg.onload = function() {
+			ctx.globalCompositeOperation = "source-over";
+			ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+			
+			ctx.fillStyle = prop("color2");
+			ctx.globalCompositeOperation = "multiply";
+			ctx.fillRect(0, 0, canvas.width, canvas.height);
+			
+			
+			ctx.globalCompositeOperation = "screen";
+				
+			var r_Img = new Image();
+			r_Img.onload = function() {
+					ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
+					
+					ctx.globalCompositeOperation = "source-over";
+					finishExporting(isPreview);
+			}
+			r_Img.src = redURL;
+		}
+		gImg.src = gPath;
+	}
+
+	rImg.src = rPath;
+}
 
 function prop(name) {
 	return document.querySelector("article[data-style="+currentStyle+"] *[data-prop="+name+"]").value;

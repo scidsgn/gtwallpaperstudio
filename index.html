@@ -48,6 +48,9 @@
 							<img src="res/gateway/icon.png" data-style="gateway">
 							<img src="res/edges/icon.png" data-style="edges">
 							<img src="res/threemat/icon.png" data-style="threemat">
+							<img src="res/portal/icon.png" data-style="portal">
+							<img src="res/tiles/icon.png" data-style="tiles">
+							<img src="res/holo/icon.png" data-style="holo">
 						</div>
 					</content>
 				</div>
@@ -701,6 +704,163 @@
 								<div class="colorInput"><input data-prop="color" value="#808080" type="color"></div>
 							</div>
 						</article>
+						
+						<article data-style="portal">
+							<div>
+								<label>Variation:</label>
+								<select data-prop="idx">
+									<option selected value="1">1</option>
+								</select>
+							</div>
+							<div>
+								<label>Light #1:</label>
+								<div class="colorInput"><input data-prop="color1" value="#FFFFFF" type="color"></div>
+							</div>
+							<div>
+								<label>Light #2:</label>
+								<div class="colorInput"><input data-prop="color2" value="#00FF00" type="color"></div>
+							</div>
+							<div>
+								<label>Light #3:</label>
+								<div class="colorInput"><input data-prop="color3" value="#00FFFF" type="color"></div>
+							</div>
+						</article>
+						
+						<article data-style="tiles">
+							<div>
+								<label>Background:</label>
+								<div class="colorInput"><input data-prop="bg" value="#FFFFFF" type="color"></div>
+							</div>
+							
+							<header>Bottom layer</header>
+							<div>
+								<label>Shape:</label>
+								<select data-prop="name1">
+									<optgroup label="Low distortion">
+										<option value="sh">Small trophy</option>
+										<option value="mh">Medium trophy</option>
+										<option value="lh">Large trophy</option>
+										<option value="xh">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="Medium distortion">
+										<option value="sm">Small trophy</option>
+										<option value="mm">Medium trophy</option>
+										<option value="lm">Large trophy</option>
+										<option value="xm">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="High distortion">
+										<option selected value="sl">Small trophy</option>
+										<option value="ml">Medium trophy</option>
+										<option value="ll">Large trophy</option>
+										<option value="xl">Extra large trophy</option>
+									</optgroup>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<div class="colorInput"><input data-prop="color1" value="#00FFFF" type="color"></div>
+							</div>
+							<div>
+								<label>Blending:</label>
+								<select data-prop="blend1">
+									<option selected value="source-over">Normal</option>
+									<option value="multiply">Multiply</option>
+									<option value="screen">Screen</option>
+								</select>
+							</div>
+							
+							<header>Middle layer</header>
+							<div>
+								<label>Shape:</label>
+								<select data-prop="name2">
+									<optgroup label="Low distortion">
+										<option value="sh">Small trophy</option>
+										<option value="mh">Medium trophy</option>
+										<option value="lh">Large trophy</option>
+										<option value="xh">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="Medium distortion">
+										<option selected value="sm">Small trophy</option>
+										<option value="mm">Medium trophy</option>
+										<option value="lm">Large trophy</option>
+										<option value="xm">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="High distortion">
+										<option value="sl">Small trophy</option>
+										<option value="ml">Medium trophy</option>
+										<option value="ll">Large trophy</option>
+										<option value="xl">Extra large trophy</option>
+									</optgroup>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<div class="colorInput"><input data-prop="color2" value="#0000FF" type="color"></div>
+							</div>
+							<div>
+								<label>Blending:</label>
+								<select data-prop="blend2">
+									<option selected value="source-over">Normal</option>
+									<option value="multiply">Multiply</option>
+									<option value="screen">Screen</option>
+								</select>
+							</div>
+							
+							<header>Top layer</header>
+							<div>
+								<label>Shape:</label>
+								<select data-prop="name3">
+									<optgroup label="Low distortion">
+										<option selected value="sh">Small trophy</option>
+										<option value="mh">Medium trophy</option>
+										<option value="lh">Large trophy</option>
+										<option value="xh">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="Medium distortion">
+										<option value="sm">Small trophy</option>
+										<option value="mm">Medium trophy</option>
+										<option value="lm">Large trophy</option>
+										<option value="xm">Extra large trophy</option>
+									</optgroup>
+									<optgroup label="High distortion">
+										<option value="sl">Small trophy</option>
+										<option value="ml">Medium trophy</option>
+										<option value="ll">Large trophy</option>
+										<option value="xl">Extra large trophy</option>
+									</optgroup>
+								</select>
+							</div>
+							<div>
+								<label>Color:</label>
+								<div class="colorInput"><input data-prop="color3" value="#000000" type="color"></div>
+							</div>
+							<div>
+								<label>Blending:</label>
+								<select data-prop="blend3">
+									<option selected value="source-over">Normal</option>
+									<option value="multiply">Multiply</option>
+									<option value="screen">Screen</option>
+								</select>
+							</div>
+						</article>
+						
+						<article data-style="holo">
+							<div>
+								<label>Camera angle:</label>
+								<select data-prop="idx">
+									<option selected value="1">1</option>
+									<option value="2">2</option>
+								</select>
+							</div>
+							<div>
+								<label>Color #1:</label>
+								<div class="colorInput"><input data-prop="color1" value="#FFFF00" type="color"></div>
+							</div>
+							<div>
+								<label>Color #2:</label>
+								<div class="colorInput"><input data-prop="color2" value="#FF0000" type="color"></div>
+							</div>
+						</article>
 					</content>
 				</div>
 				
@@ -725,6 +885,6 @@
 			</aside>
 			<div class="rendering">Rendering...</div>
 		</main>
-		<script src="script.js?v=10"></script>
+		<script src="script.js?v=13"></script>
 	</body>
 </html>
